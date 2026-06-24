@@ -56,9 +56,16 @@ with st.sidebar:
 col_m, col_d = st.columns([3, 1])
 
 with col_m:
-    fig = build_marey(mm, linea=linea, t0=t0, t1=t1,
-                      titulo=f"Malla {linea} — {ventana}")
+    diag = st.checkbox("Mostrar diagnóstico Marey", value=False)
+    fig = build_marey(mm, linea=linea, t0=t0, t1=t1)
     st.plotly_chart(fig, use_container_width=True)
+    if diag:
+        d = mm[mm.linea == linea]
+        st.caption(f"{d.tren_id.nunique()} trenes · {d.estacion.nunique()} estaciones · "
+                   f"km {d.dist_km.min():.1f}–{d.dist_km.max():.1f}")
+        est = (d.drop_duplicates("estacion")[["estacion", "dist_km"]]
+                 .sort_values("dist_km").reset_index(drop=True))
+        st.dataframe(est, hide_index=True, height=240)
 
 # ---- panel del sub-modelo ----
 with col_d:
