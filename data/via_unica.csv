@@ -1,0 +1,5 @@
+linea,nombre,dist_lo,dist_hi,bloquea
+L2,Concepción–salida Túnel Chepe,1.0,3.0,True
+L1,Mercado–El Arenal,82.79,84.78,True
+L1,Hualqui–La Leonera,46.92,55.32,True
+L1,Hualqui–Laja (con desvíos),1.6,46.92,False
